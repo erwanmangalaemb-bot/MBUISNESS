@@ -1,70 +1,84 @@
 'use client'
+import Reveal from './Reveal'
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 px-6" style={{ background: 'var(--bg)' }}>
-      <div className="max-w-2xl mx-auto">
-        <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: 'var(--red)' }}>Contact</p>
-        <h2 className="font-black leading-tight mb-10" style={{ fontSize: 'clamp(1.8rem,5vw,2.6rem)' }}>
-          Parle-nous de ton projet
-        </h2>
+    <section id="contact" className="py-28 px-6" style={{ background: 'var(--bg)' }}>
+      <div className="max-w-lg mx-auto">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-4">
+        <Reveal>
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: 'var(--red)' }}>
+              Contact
+            </p>
+            <h2
+              className="font-black tracking-tight mb-3"
+              style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}
+            >
+              Parlons de ton projet
+            </h2>
+            <p className="text-sm" style={{ color: 'var(--muted)' }}>
+              Répond sous 24h · Sans engagement
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {['Prénom', 'Nom'].map((label) => (
                 <div key={label}>
-                  <label className="block text-xs font-semibold mb-1.5" style={{ color: 'rgba(255,255,255,0.7)' }}>{label}</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 rounded-lg text-sm text-white outline-none transition-colors"
-                    style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
+                    placeholder={label}
+                    className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none transition-all"
+                    style={{
+                      background: 'var(--bg3)',
+                      border: '1px solid var(--border)',
+                    }}
+                    onFocus={e => (e.target.style.borderColor = 'var(--border-2)')}
+                    onBlur={e => (e.target.style.borderColor = 'var(--border)')}
                   />
                 </div>
               ))}
             </div>
-            <div>
-              <label className="block text-xs font-semibold mb-1.5" style={{ color: 'rgba(255,255,255,0.7)' }}>Email</label>
-              <input
-                type="email"
-                className="w-full px-4 py-3 rounded-lg text-sm text-white outline-none"
-                style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-semibold mb-1.5" style={{ color: 'rgba(255,255,255,0.7)' }}>Ton projet</label>
-              <textarea
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg text-sm text-white outline-none resize-none"
-                style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
-                placeholder="Montage vidéo, site web, stratégie..."
-              />
-            </div>
+
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none transition-all"
+              style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
+              onFocus={e => (e.target.style.borderColor = 'var(--border-2)')}
+              onBlur={e => (e.target.style.borderColor = 'var(--border)')}
+            />
+
+            <textarea
+              rows={4}
+              placeholder="Décris ton projet — montage vidéo, site web, stratégie..."
+              className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none resize-none transition-all"
+              style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
+              onFocus={e => (e.target.style.borderColor = 'var(--border-2)')}
+              onBlur={e => (e.target.style.borderColor = 'var(--border)')}
+            />
+
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl font-bold text-white transition-transform hover:-translate-y-0.5"
+              className="btn-glow w-full py-3.5 rounded-xl font-semibold text-sm text-white mt-1"
               style={{ background: 'var(--red)' }}
             >
               Envoyer →
             </button>
           </form>
+        </Reveal>
 
-          <div className="flex flex-col gap-6 justify-center">
-            {[
-              { icon: '📧', label: 'Email', val: 'contact@mbusiness.fr' },
-              { icon: '📱', label: 'WhatsApp / Téléphone', val: '+33 1 00 00 00 00' },
-              { icon: '🌍', label: 'Zone', val: 'France & Francophonie' },
-            ].map((info) => (
-              <div key={info.label} className="flex items-start gap-4">
-                <span className="text-2xl">{info.icon}</span>
-                <div>
-                  <div className="text-xs mb-0.5" style={{ color: 'var(--muted)' }}>{info.label}</div>
-                  <div className="font-semibold">{info.val}</div>
-                </div>
-              </div>
-            ))}
+        {/* Contact info */}
+        <Reveal delay={150}>
+          <div className="flex justify-center gap-8 mt-10 text-xs" style={{ color: 'var(--muted)' }}>
+            <span>contact@mbusiness.fr</span>
+            <span style={{ color: 'var(--border-2)' }}>·</span>
+            <span>France &amp; Francophonie</span>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

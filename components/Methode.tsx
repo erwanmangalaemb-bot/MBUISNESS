@@ -1,45 +1,56 @@
+import Reveal from './Reveal'
+
 const steps = [
-  { n: '01', title: 'Brief & devis en 24h',       desc: 'Tu remplis le formulaire, on analyse ta demande et on t\'envoie une offre claire sous 24h.' },
-  { n: '02', title: 'Production & livraison 48h', desc: 'On passe en production immédiatement. Montage, développement ou stratégie — livré en 48h garantis.' },
-  { n: '03', title: 'Révisions & validation',     desc: 'Tu valides ou demandes des ajustements. On itère jusqu\'à ce que ce soit parfait.' },
-  { n: '04', title: 'Mise en ligne & suivi',      desc: 'On publie, on mesure les résultats et on reste dispo pour optimiser en continu.' },
+  { n: '01', title: 'Brief & devis',       desc: 'Tu décris ton projet. On répond avec une offre claire sous 24h.' },
+  { n: '02', title: 'Production',          desc: 'On livre en 48h — montage, site ou stratégie, sans délai.' },
+  { n: '03', title: 'Révisions',           desc: 'Tu valides. On ajuste jusqu\'à la perfection.' },
+  { n: '04', title: 'Mise en ligne',       desc: 'On publie, on mesure, on optimise en continu.' },
 ]
 
 export default function Methode() {
   return (
-    <section id="methode" className="py-20 px-6" style={{ background: 'var(--bg)' }}>
+    <section id="methode" className="py-28 px-6" style={{ background: 'var(--bg)' }}>
       <div className="max-w-2xl mx-auto">
 
-        <div className="text-center mb-14">
-          <span
-            className="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
-            style={{ background: 'var(--red-dim)', color: 'var(--red)' }}
-          >
-            Méthode
-          </span>
-          <h2 className="font-black" style={{ fontSize: 'clamp(1.8rem,5vw,2.8rem)' }}>
-            Comment ça marche ?
-          </h2>
-          <p className="mt-2 text-sm" style={{ color: 'var(--muted)' }}>Simple, rapide, efficace.</p>
-        </div>
-
-        {/* GreenSpace large-number style */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {steps.map((s) => (
-            <div
-              key={s.n}
-              className="p-6 rounded-2xl transition-transform hover:-translate-y-0.5"
-              style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
+        <Reveal>
+          <div className="text-center mb-16">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: 'var(--red)' }}>
+              Méthode
+            </p>
+            <h2
+              className="font-black tracking-tight"
+              style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}
             >
+              Simple. Rapide. Efficace.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 70}>
               <div
-                className="text-5xl font-black mb-4 leading-none"
-                style={{ color: 'rgba(230,60,30,0.2)', fontVariantNumeric: 'tabular-nums' }}
+                className="card-hover p-7 rounded-2xl"
+                style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
               >
-                {s.n}
+                {/* Large ghost number */}
+                <div
+                  className="text-6xl font-black leading-none mb-5 tabular-nums"
+                  style={{ color: 'var(--border-2)', letterSpacing: '-0.04em' }}
+                >
+                  {s.n}
+                </div>
+                <div
+                  className="font-semibold mb-2"
+                  style={{ fontSize: '1rem', letterSpacing: '-0.01em' }}
+                >
+                  {s.title}
+                </div>
+                <div className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>
+                  {s.desc}
+                </div>
               </div>
-              <div className="font-bold text-base mb-2">{s.title}</div>
-              <div className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
