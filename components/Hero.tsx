@@ -2,85 +2,114 @@ export default function Hero() {
   return (
     <section
       id="accueil"
-      className="relative noise flex flex-col justify-center min-h-screen px-6 pt-28 pb-16 overflow-hidden"
+      className="relative dot-grid flex flex-col items-center justify-center min-h-screen px-6 pt-24 pb-20 text-center overflow-hidden"
       style={{ background: 'var(--bg)' }}
     >
-      {/* Background glow orbs */}
+      {/* Ambient glow */}
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(230,60,30,0.12) 0%, transparent 70%)', filter: 'blur(40px)' }}
+        className="absolute pointer-events-none"
+        style={{
+          top: '30%', left: '50%',
+          transform: 'translate(-50%,-50%)',
+          width: 600, height: 600,
+          background: 'radial-gradient(circle, rgba(232,57,28,0.1) 0%, transparent 65%)',
+          filter: 'blur(1px)',
+        }}
+      />
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          bottom: '10%', right: '10%',
+          width: 300, height: 300,
+          background: 'radial-gradient(circle, rgba(100,120,255,0.06) 0%, transparent 70%)',
+        }}
       />
 
-      <div className="relative z-10 max-w-xl mx-auto w-full text-center md:text-left">
+      {/* Content */}
+      <div className="relative z-10 max-w-2xl">
 
-        {/* Announcement pill — Verdant style */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-xs font-semibold"
-          style={{ background: 'var(--glass)', border: '1px solid var(--border)', color: 'var(--muted)' }}>
-          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'var(--red)' }} />
-          Devis gratuit · Livraison 48h garantie
+        {/* Eyebrow */}
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-8 text-xs font-medium"
+          style={{ background: 'var(--glass-2)', border: '1px solid var(--border-2)', color: 'var(--muted-2)' }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--red)' }} />
+          Montage vidéo · Site web · Stratégie digitale
         </div>
 
-        {/* Headline — Creatiwise ultra-bold + Verdant italic accent */}
+        {/* Headline */}
         <h1
-          className="font-black leading-none mb-6 tracking-tight"
-          style={{ fontSize: 'clamp(3rem,10vw,5.5rem)' }}
+          className="font-black leading-none tracking-tight mb-6"
+          style={{ fontSize: 'clamp(3.5rem,11vw,7rem)', letterSpacing: '-0.04em' }}
         >
-          Tu tournes.<br />
-          <em className="not-italic" style={{ color: 'var(--red)', fontStyle: 'italic' }}>On gère</em><br />
+          Tu tournes.
+          <br />
+          <span className="gradient-text">On gère</span>
+          <br />
           le reste.
         </h1>
 
-        <p className="text-base leading-relaxed mb-8 md:mb-10" style={{ color: 'var(--muted)', maxWidth: 440 }}>
-          Montage vidéo professionnel + couche opérationnelle + site internet.
-          Un système <strong className="text-white font-semibold">clé en main</strong> pour créateurs et établissements francophones.
+        {/* Sub */}
+        <p
+          className="text-base leading-relaxed mb-10 mx-auto"
+          style={{ color: 'var(--muted-2)', maxWidth: 460, fontSize: '1.05rem', letterSpacing: '-0.01em' }}
+        >
+          Un système clé en main pour créateurs et établissements francophones.
+          Montage, site, stratégie — livré en&nbsp;48h.
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center md:items-start gap-3 mb-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white text-base transition-all hover:-translate-y-0.5 glow-pulse"
-            style={{ background: 'var(--red)', minWidth: 200 }}
+            className="btn-glow inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-white"
+            style={{ background: 'var(--red)' }}
           >
             Devis gratuit →
           </a>
           <a
             href="#travaux"
-            className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-semibold text-sm transition-all hover:text-white"
-            style={{ border: '1px solid var(--border)', color: 'var(--muted)', minWidth: 180 }}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm transition-colors hover:text-white"
+            style={{ border: '1px solid var(--border-2)', color: 'var(--muted-2)' }}
           >
-            Voir les travaux ↗
+            Voir les travaux
           </a>
         </div>
 
-        {/* Trust badges — Verdant style */}
-        <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 text-xs" style={{ color: 'var(--muted)' }}>
-          {['Livraison 48h', 'Sans engagement', 'Devis en 24h'].map((t) => (
+        {/* Trust row */}
+        <div className="flex flex-wrap items-center justify-center gap-5 mt-10 text-xs" style={{ color: 'var(--muted)' }}>
+          {['Livraison 48h garantie', 'Sans engagement', 'Réponse sous 24h'].map((t, i) => (
             <span key={t} className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--red)' }} viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
+              {i > 0 && <span className="w-px h-3 inline-block" style={{ background: 'var(--border-2)' }} />}
               {t}
             </span>
           ))}
         </div>
       </div>
 
-      {/* Stats — GreenSpace bordered cards */}
-      <div className="relative z-10 max-w-xl mx-auto w-full mt-16">
-        <div className="grid grid-cols-3 gap-3">
+      {/* Stats — bottom of hero */}
+      <div className="relative z-10 w-full max-w-xl mt-20">
+        <div
+          className="grid grid-cols-3 rounded-2xl overflow-hidden"
+          style={{ border: '1px solid var(--border)', background: 'var(--glass)' }}
+        >
           {[
             { val: '48h', label: 'Livraison garantie' },
-            { val: '50+', label: 'Clients satisfaits' },
-            { val: '×3',  label: 'Audience en 90j' },
-          ].map((s) => (
+            { val: '50+', label: 'Clients satisfaits'  },
+            { val: '×3',  label: 'Audience en 90 jours'},
+          ].map((s, i) => (
             <div
               key={s.val}
-              className="rounded-2xl p-4 text-center transition-transform hover:-translate-y-0.5"
-              style={{ border: '1px solid var(--border)', background: 'var(--glass)' }}
+              className="py-6 text-center"
+              style={{ borderRight: i < 2 ? '1px solid var(--border)' : 'none' }}
             >
-              <div className="text-2xl font-black mb-1" style={{ color: 'var(--red)' }}>{s.val}</div>
-              <div className="text-xs leading-snug" style={{ color: 'var(--muted)' }}>{s.label}</div>
+              <div
+                className="text-3xl font-black mb-1"
+                style={{ letterSpacing: '-0.04em', color: 'white' }}
+              >
+                {s.val}
+              </div>
+              <div className="text-xs" style={{ color: 'var(--muted)' }}>{s.label}</div>
             </div>
           ))}
         </div>

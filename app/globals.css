@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,700;1,14..32,800;1,14..32,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,25 +6,59 @@
 
 @layer base {
   :root {
-    --red:     #e63c1e;
-    --red-dim: rgba(230,60,30,0.15);
-    --bg:      #0a0c13;
-    --bg2:     #0f1219;
-    --bg3:     #161b26;
-    --bg4:     #1c2130;
-    --glass:   rgba(255,255,255,0.04);
-    --border:  rgba(255,255,255,0.08);
-    --muted:   rgba(255,255,255,0.45);
-    --white:   #ffffff;
+    --red:        #e8391c;
+    --red-light:  #ff6b4a;
+    --red-dim:    rgba(232,57,28,0.12);
+    --bg:         #080a10;
+    --bg2:        #0c0f18;
+    --bg3:        #12161f;
+    --bg4:        #181d28;
+    --glass:      rgba(255,255,255,0.03);
+    --glass-2:    rgba(255,255,255,0.06);
+    --border:     rgba(255,255,255,0.07);
+    --border-2:   rgba(255,255,255,0.12);
+    --muted:      rgba(255,255,255,0.38);
+    --muted-2:    rgba(255,255,255,0.6);
   }
+
   html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
-    color: var(--white);
-    font-family: 'Outfit', sans-serif;
+    color: #fff;
+    font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
   }
+
+  ::selection { background: var(--red); color: white; }
 }
+
+/* ── Gradient text ───────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-light) 50%, var(--red) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* ── Scroll reveal ───────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
 
 /* ── Marquee ─────────────────────────────── */
 @keyframes marquee {
@@ -34,30 +68,34 @@
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 22s linear infinite;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
 }
-.marquee-track:hover { animation-play-state: paused; }
 
-/* ── Fade-in on scroll ───────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* ── Glow button ─────────────────────────── */
+.btn-glow {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.fade-up { animation: fadeUp .6s ease both; }
-
-/* ── Glow pulse ──────────────────────────── */
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 16px rgba(230,60,30,0.25); }
-  50%       { box-shadow: 0 0 32px rgba(230,60,30,0.5); }
+.btn-glow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(232,57,28,0.4), 0 4px 16px rgba(0,0,0,0.4);
 }
-.glow-pulse { animation: glowPulse 2.5s ease infinite; }
 
-/* ── Noise grain overlay ─────────────────── */
-.noise::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
+/* ── Dot grid bg ─────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Card hover ──────────────────────────── */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-2) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
