@@ -2,18 +2,21 @@ import Reveal from './Reveal'
 
 const reviews = [
   {
+    img: 'https://picsum.photos/seed/person-karim/80/80',
     initials: 'KB',
     name: 'Karim B.',
     role: 'Créateur · 120K abonnés',
     text: 'En 3 mois, mon audience a triplé. Montage pro, rapide, et ils comprennent exactement ce que je veux.',
   },
   {
+    img: 'https://picsum.photos/seed/person-sophie/80/80',
     initials: 'SM',
     name: 'Sophie M.',
     role: 'Restauratrice · Paris 11e',
     text: 'Site livré en 48h, beau et rapide. J\'ai directement vu une hausse des réservations en ligne.',
   },
   {
+    img: 'https://picsum.photos/seed/person-mamadou/80/80',
     initials: 'MD',
     name: 'Mamadou D.',
     role: 'Entrepreneur · Dakar',
@@ -31,10 +34,7 @@ export default function Testimonials() {
             <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: 'var(--red)' }}>
               Avis clients
             </p>
-            <h2
-              className="font-black tracking-tight"
-              style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}
-            >
+            <h2 className="font-black tracking-tight" style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}>
               Ils nous font confiance
             </h2>
           </div>
@@ -47,7 +47,6 @@ export default function Testimonials() {
                 className="card-hover flex flex-col p-6 rounded-2xl h-full"
                 style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
               >
-                {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <svg key={j} className="w-3.5 h-3.5" viewBox="0 0 20 20" fill="#fbbf24">
@@ -61,11 +60,14 @@ export default function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-3">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
-                    style={{ background: 'var(--red-dim)', color: 'var(--red)', border: '1px solid var(--border)' }}
-                  >
-                    {r.initials}
+                  {/* Avatar with photo */}
+                  <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: '1px solid var(--border)' }}>
+                    <img
+                      src={r.img}
+                      alt={r.name}
+                      className="w-full h-full object-cover"
+                      style={{ filter: 'grayscale(30%) brightness(0.85)' }}
+                    />
                   </div>
                   <div>
                     <div className="text-xs font-semibold">{r.name}</div>
