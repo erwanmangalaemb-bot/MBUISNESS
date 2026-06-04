@@ -6,13 +6,58 @@
 
 @layer base {
   :root {
-    --red: #e63c1e;
-    --bg: #0b0e17;
-    --bg2: #111520;
-    --bg3: #161b28;
-    --border: rgba(255,255,255,0.08);
-    --muted: rgba(255,255,255,0.45);
+    --red:     #e63c1e;
+    --red-dim: rgba(230,60,30,0.15);
+    --bg:      #0a0c13;
+    --bg2:     #0f1219;
+    --bg3:     #161b26;
+    --bg4:     #1c2130;
+    --glass:   rgba(255,255,255,0.04);
+    --border:  rgba(255,255,255,0.08);
+    --muted:   rgba(255,255,255,0.45);
+    --white:   #ffffff;
   }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* ── Marquee ─────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Fade-in on scroll ───────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .6s ease both; }
+
+/* ── Glow pulse ──────────────────────────── */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(230,60,30,0.25); }
+  50%       { box-shadow: 0 0 32px rgba(230,60,30,0.5); }
+}
+.glow-pulse { animation: glowPulse 2.5s ease infinite; }
+
+/* ── Noise grain overlay ─────────────────── */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
 }
