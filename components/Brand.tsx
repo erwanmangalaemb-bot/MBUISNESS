@@ -9,20 +9,29 @@ export default function Brand() {
             className="relative rounded-3xl overflow-hidden p-10 md:p-14"
             style={{ border: '1px solid var(--border)', background: 'var(--bg3)' }}
           >
-            {/* Background photo */}
-            <img
-              src="https://picsum.photos/seed/mbuisness-hero/1200/600"
-              alt=""
+            {/* CSS grid background */}
+            <div
+              className="absolute inset-0"
               aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: 'brightness(0.12) saturate(0.3)', mixBlendMode: 'luminosity' }}
+              style={{
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+                backgroundSize: '44px 44px',
+              }}
             />
 
-            {/* Glow overlay */}
+            {/* Radial fade so grid fades at edges */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse 70% 60% at 50% 110%, rgba(232,57,28,0.12) 0%, transparent 70%)',
+                background: 'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, var(--bg3) 90%)',
+              }}
+            />
+
+            {/* Bottom red glow */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse 60% 40% at 50% 110%, rgba(232,57,28,0.14) 0%, transparent 70%)',
               }}
             />
 

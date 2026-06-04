@@ -2,22 +2,28 @@ import Reveal from './Reveal'
 
 const reviews = [
   {
-    img: 'https://picsum.photos/seed/person-karim/80/80',
     initials: 'KB',
+    color: 'rgba(232,57,28,0.15)',
+    borderColor: 'rgba(232,57,28,0.25)',
+    textColor: 'var(--red)',
     name: 'Karim B.',
     role: 'Créateur · 120K abonnés',
     text: 'En 3 mois, mon audience a triplé. Montage pro, rapide, et ils comprennent exactement ce que je veux.',
   },
   {
-    img: 'https://picsum.photos/seed/person-sophie/80/80',
     initials: 'SM',
+    color: 'rgba(59,130,246,0.12)',
+    borderColor: 'rgba(59,130,246,0.22)',
+    textColor: 'rgba(100,160,255,0.9)',
     name: 'Sophie M.',
     role: 'Restauratrice · Paris 11e',
     text: 'Site livré en 48h, beau et rapide. J\'ai directement vu une hausse des réservations en ligne.',
   },
   {
-    img: 'https://picsum.photos/seed/person-mamadou/80/80',
     initials: 'MD',
+    color: 'rgba(16,185,129,0.12)',
+    borderColor: 'rgba(16,185,129,0.22)',
+    textColor: 'rgba(60,200,140,0.9)',
     name: 'Mamadou D.',
     role: 'Entrepreneur · Dakar',
     text: 'Le système clé en main m\'a permis de me concentrer sur mon activité. Résultats visibles dès le premier mois.',
@@ -60,14 +66,12 @@ export default function Testimonials() {
                 </p>
 
                 <div className="flex items-center gap-3">
-                  {/* Avatar with photo */}
-                  <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0" style={{ border: '1px solid var(--border)' }}>
-                    <img
-                      src={r.img}
-                      alt={r.name}
-                      className="w-full h-full object-cover"
-                      style={{ filter: 'grayscale(30%) brightness(0.85)' }}
-                    />
+                  {/* Initials avatar */}
+                  <div
+                    className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center"
+                    style={{ background: r.color, border: `1px solid ${r.borderColor}` }}
+                  >
+                    <span className="text-xs font-bold" style={{ color: r.textColor }}>{r.initials}</span>
                   </div>
                   <div>
                     <div className="text-xs font-semibold">{r.name}</div>
