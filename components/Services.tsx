@@ -1,50 +1,30 @@
 const services = [
-  {
-    icon: '📊',
-    title: 'Stratégie & Conseil',
-    description:
-      'Nous analysons votre marché et définissons avec vous une stratégie de croissance adaptée à vos objectifs.',
-  },
-  {
-    icon: '🚀',
-    title: 'Développement commercial',
-    description:
-      'Acquisition de clients, partenariats stratégiques, structuration de votre force de vente — nous vous accompagnons.',
-  },
-  {
-    icon: '💼',
-    title: 'Gestion de projet',
-    description:
-      'Pilotage de vos projets de A à Z avec rigueur et transparence pour livrer dans les délais et le budget.',
-  },
-  {
-    icon: '📱',
-    title: 'Présence digitale',
-    description:
-      'Site web, réseaux sociaux, SEO — nous renforçons votre visibilité en ligne pour attirer plus de clients.',
-  },
+  { icon: '🎬', title: 'Montage vidéo', desc: 'Reels, YouTube, TikTok, courts-métrages — livré en 48h avec sous-titres, musique et effets.' },
+  { icon: '🌐', title: 'Création de site web', desc: 'Site vitrine, landing page ou portfolio — design moderne, rapide, optimisé mobile et prêt à convertir.' },
+  { icon: '📱', title: 'Stratégie de contenu', desc: "Plan de publication, scripts, formats — on optimise chaque contenu pour maximiser ta portée organique." },
+  { icon: '📈', title: 'Couche opérationnelle', desc: 'Automatisation, outils de gestion, newsletter — on met en place le système complet derrière ta marque.' },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
-          <h2 className="section-title">Nos services</h2>
-          <p className="section-subtitle">
-            Des solutions concrètes pour chaque étape de votre développement.
-          </p>
-        </div>
+    <section id="services" className="py-20 px-6" style={{ background: 'var(--bg2)' }}>
+      <div className="max-w-2xl mx-auto">
+        <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: 'var(--red)' }}>Services</p>
+        <h2 className="font-black leading-tight mb-2" style={{ fontSize: 'clamp(1.8rem,5vw,2.6rem)' }}>
+          Ce qu&apos;on fait pour toi
+        </h2>
+        <p className="mb-10" style={{ color: 'var(--muted)' }}>Tout ce dont tu as besoin pour exister fort sur internet.</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {services.map((s) => (
             <div
               key={s.title}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-4"
+              className="p-6 rounded-2xl"
+              style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
             >
-              <span className="text-4xl">{s.icon}</span>
-              <h3 className="text-lg font-semibold text-gray-900">{s.title}</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">{s.description}</p>
+              <div className="text-3xl mb-4">{s.icon}</div>
+              <div className="font-bold text-base mb-2">{s.title}</div>
+              <div className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</div>
             </div>
           ))}
         </div>

@@ -1,29 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  :root {
+    --red: #e63c1e;
+    --bg: #0b0e17;
+    --bg2: #111520;
+    --bg3: #161b28;
+    --border: rgba(255,255,255,0.08);
+    --muted: rgba(255,255,255,0.45);
   }
-  body {
-    @apply text-gray-800 bg-white;
-  }
-}
-
-@layer components {
-  .btn-primary {
-    @apply inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200;
-  }
-  .btn-outline {
-    @apply inline-block px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-navy-600 transition-colors duration-200;
-  }
-  .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
-  }
-  .section-subtitle {
-    @apply text-lg text-gray-600 max-w-2xl mx-auto;
-  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: white; font-family: 'Outfit', sans-serif; }
 }
