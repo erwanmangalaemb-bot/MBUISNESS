@@ -7,39 +7,50 @@ export default function Hero() {
       className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-24 pb-20 text-center overflow-hidden dot-grid"
       style={{ background: 'var(--bg)' }}
     >
-      {/* ── Ambient blobs ── */}
+      {/* ── Cinematic aurora background (video-like) ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="float-slow absolute" style={{
-          top: '15%', left: '10%', width: 360, height: 360,
-          background: 'radial-gradient(circle, rgba(232,57,28,0.08) 0%, transparent 70%)',
-          filter: 'blur(2px)',
+        {/* Large orb — red/warm, top-left */}
+        <div className="aurora-1 absolute rounded-full" style={{
+          top: '-15%', left: '-10%', width: 800, height: 800,
+          background: 'radial-gradient(circle, rgba(232,57,28,0.13) 0%, rgba(180,30,10,0.06) 40%, transparent 70%)',
+          filter: 'blur(80px)',
         }} />
-        <div className="float absolute" style={{
-          top: '55%', right: '5%', width: 280, height: 280,
-          background: 'radial-gradient(circle, rgba(80,100,255,0.06) 0%, transparent 70%)',
-          filter: 'blur(2px)',
+        {/* Large orb — indigo, bottom-right */}
+        <div className="aurora-2 absolute rounded-full" style={{
+          bottom: '-20%', right: '-15%', width: 900, height: 900,
+          background: 'radial-gradient(circle, rgba(80,100,240,0.09) 0%, rgba(60,80,200,0.04) 40%, transparent 70%)',
+          filter: 'blur(100px)',
         }} />
-        <div className="float-fast absolute" style={{
-          bottom: '20%', left: '20%', width: 180, height: 180,
-          background: 'radial-gradient(circle, rgba(232,57,28,0.05) 0%, transparent 70%)',
+        {/* Mid orb — deep red, center-bottom */}
+        <div className="aurora-3 absolute rounded-full" style={{
+          bottom: '5%', left: '30%', width: 600, height: 600,
+          background: 'radial-gradient(circle, rgba(232,57,28,0.07) 0%, transparent 65%)',
+          filter: 'blur(70px)',
+        }} />
+        {/* Violet orb, top-right */}
+        <div className="aurora-2 absolute rounded-full" style={{
+          top: '10%', right: '5%', width: 400, height: 400,
+          background: 'radial-gradient(circle, rgba(130,60,220,0.07) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          animationDelay: '-10s',
         }} />
 
-        {/* Spinning ring */}
+        {/* Spinning rings */}
         <div className="spin-slow absolute" style={{
           top: '50%', left: '50%',
-          marginTop: -300, marginLeft: -300,
-          width: 600, height: 600,
+          marginTop: -320, marginLeft: -320,
+          width: 640, height: 640,
           borderRadius: '50%',
           border: '1px solid rgba(255,255,255,0.025)',
         }} />
         <div className="spin-slow absolute" style={{
           top: '50%', left: '50%',
-          marginTop: -200, marginLeft: -200,
-          width: 400, height: 400,
+          marginTop: -210, marginLeft: -210,
+          width: 420, height: 420,
           borderRadius: '50%',
-          border: '1px solid rgba(232,57,28,0.06)',
+          border: '1px solid rgba(232,57,28,0.055)',
           animationDirection: 'reverse',
-          animationDuration: '30s',
+          animationDuration: '32s',
         }} />
       </div>
 
