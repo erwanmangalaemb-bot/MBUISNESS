@@ -1,332 +1,588 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MBusiness — Votre partenaire business</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            navy: { 600: '#1e3a5f', 700: '#162d4a', 800: '#0f1f35' }
-          }
-        }
-      }
-    }
-  </script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MBuisness — Tu tournes. On gère le reste.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #e63c1e;
+      --bg:     #0b0e17;
+      --bg2:    #111520;
+      --bg3:    #161b28;
+      --white:  #ffffff;
+      --muted:  rgba(255,255,255,.45);
+      --border: rgba(255,255,255,.08);
+    }
+
     html { scroll-behavior: smooth; }
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--white); }
 
-    /* Navbar blur */
-    .glass { background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); }
+    /* ── NAVBAR ─────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem; height: 64px;
+      background: rgba(11,14,23,.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 30px; flex-shrink: 0; }
+    .nav-logo span { font-size: 1.2rem; font-weight: 800; letter-spacing: -.01em; }
+    .nav-logo span em { font-style: normal; color: var(--red); }
 
-    /* Hero gradient orbs */
-    .orb-1 { position:absolute; top:5rem; left:2rem; width:18rem; height:18rem;
-              background:#60a5fa; border-radius:9999px; filter:blur(80px); opacity:.12; }
-    .orb-2 { position:absolute; bottom:5rem; right:2rem; width:24rem; height:24rem;
-              background:#818cf8; border-radius:9999px; filter:blur(80px); opacity:.12; }
+    .burger { background: none; border: none; cursor: pointer; color: var(--white); padding: .4rem; }
+    .burger svg { width: 26px; height: 26px; display: block; }
 
-    /* Animate bounce arrow */
-    @keyframes bounce { 0%,100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(.8,0,1,1)}
-                        50%{transform:none;animation-timing-function:cubic-bezier(0,0,.2,1)} }
-    .bounce { animation: bounce 1s infinite; }
+    /* Mobile overlay menu */
+    .mobile-menu {
+      display: none; flex-direction: column;
+      position: fixed; inset: 0; z-index: 99;
+      background: var(--bg); padding: 80px 1.5rem 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 1.1rem 0; font-size: 1.15rem; font-weight: 600;
+      color: var(--white); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a.active { color: var(--red); }
+    .mobile-menu .menu-cta {
+      margin-top: 1.5rem; padding: 1rem; background: var(--red);
+      border-radius: 10px; text-align: center; font-weight: 700;
+      font-size: 1rem; color: var(--white); text-decoration: none;
+    }
+    .close-btn {
+      position: absolute; top: 18px; right: 18px;
+      background: none; border: none; color: var(--white); cursor: pointer;
+    }
+    .close-btn svg { width: 28px; height: 28px; }
 
-    /* Mobile menu toggle */
-    #mobile-menu { display: none; }
-    #mobile-menu.open { display: flex; }
+    /* ── SECTIONS BASE ──────────────────────── */
+    section { padding: 6rem 1.5rem; }
+    .container { max-width: 720px; margin: 0 auto; }
+    .container-wide { max-width: 1000px; margin: 0 auto; }
+    .label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 1.2rem;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    #accueil {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding-top: 80px;
+    }
+    .hero-tag { color: var(--red); }
+    .hero-h1 {
+      font-size: clamp(2.6rem, 8vw, 4.5rem);
+      font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem;
+    }
+    .hero-h1 .accent { color: var(--red); }
+    .hero-desc {
+      font-size: 1.05rem; line-height: 1.7;
+      color: rgba(255,255,255,.6); margin-bottom: 2.5rem; max-width: 520px;
+    }
+    .btn-red {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--red); color: var(--white);
+      padding: .9rem 2rem; border-radius: 10px;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-red:hover { background: #c9341a; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-block; color: var(--white); text-decoration: none;
+      font-weight: 600; font-size: .95rem; margin-top: 1.2rem;
+      opacity: .7; transition: opacity .2s;
+    }
+    .btn-ghost:hover { opacity: 1; }
+    .hero-actions { display: flex; flex-direction: column; gap: .5rem; }
+
+    /* ── STATS ──────────────────────────────── */
+    .stats-card {
+      background: var(--bg3); border-radius: 16px;
+      border: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      margin-top: 3rem; overflow: hidden;
+    }
+    .stat-item {
+      padding: 1.8rem 1rem; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-value { font-size: 2.2rem; font-weight: 900; color: var(--red); }
+    .stat-label { font-size: .75rem; color: var(--muted); margin-top: .4rem; line-height: 1.4; }
+
+    /* ── BRAND ──────────────────────────────── */
+    #brand { background: var(--bg); text-align: center; }
+    .brand-label {
+      font-size: .65rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 3rem;
+    }
+    .brand-logo-big { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .brand-logo-big svg { width: 120px; height: 100px; }
+    .brand-name-big {
+      font-size: clamp(2.5rem, 9vw, 5rem); font-weight: 900;
+      font-style: italic; letter-spacing: -.02em; line-height: 1;
+    }
+    .brand-name-big em { font-style: normal; color: var(--red); }
+    .brand-quote {
+      margin-top: 2.5rem; font-size: 1rem; font-style: italic;
+      color: var(--muted); max-width: 420px; margin-inline: auto;
+      line-height: 1.7;
+    }
+
+    /* ── SERVICES ───────────────────────────── */
+    #services { background: var(--bg2); }
+    .services-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    @media(min-width:600px){ .services-grid { grid-template-columns: 1fr 1fr; } }
+    .service-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.8rem;
+    }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .6rem; }
+    .service-desc { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── TRAVAUX ────────────────────────────── */
+    #travaux { background: var(--bg); }
+    .travaux-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .travaux-card {
+      border-radius: 14px; overflow: hidden;
+      background: var(--bg3); border: 1px solid var(--border);
+      aspect-ratio: 4/3; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.2rem;
+      position: relative;
+    }
+    .travaux-tag {
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--red); margin-bottom: .3rem;
+    }
+    .travaux-title { font-size: .95rem; font-weight: 700; }
+
+    /* ── MÉTHODE ────────────────────────────── */
+    #methode { background: var(--bg2); }
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 2.5rem; }
+    .step {
+      display: flex; gap: 1.5rem; padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink: 0; width: 2.2rem; height: 2.2rem;
+      border: 2px solid var(--red); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 800; color: var(--red);
+    }
+    .step-title { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .step-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── CTA BANNER ─────────────────────────── */
+    #cta {
+      background: linear-gradient(135deg, #1a3a8a 0%, #2563eb 50%, #1d4ed8 100%);
+      text-align: center; padding: 5rem 1.5rem; position: relative; overflow: hidden;
+    }
+    #cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 160'%3E%3Cpath d='M20 160 L80 40 L140 160 Z' fill='white' opacity='.06'/%3E%3Cpath d='M70 160 L110 80 L150 160 Z' fill='white' opacity='.06'/%3E%3C/svg%3E") center/cover no-repeat;
+    }
+    .cta-label {
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(255,255,255,.65); margin-bottom: 1.2rem; position: relative;
+    }
+    .cta-title {
+      font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900;
+      line-height: 1.15; margin-bottom: 2rem; position: relative;
+    }
+    .btn-red-lg {
+      position: relative; display: inline-flex; align-items: center;
+      background: var(--red); color: var(--white);
+      padding: 1rem 2.2rem; border-radius: 12px;
+      font-size: 1.05rem; font-weight: 700; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-red-lg:hover { background: #c9341a; transform: translateY(-2px); }
+
+    /* ── CONTACT ────────────────────────────── */
+    #contact { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 2.5rem; }
+    @media(min-width:700px){ .contact-grid { grid-template-columns: 1fr 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.1rem; }
+    .form-group label { font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.7); }
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--white); border-radius: 8px;
+      padding: .8rem 1rem; font-family: inherit; font-size: .9rem;
+      outline: none; transition: border-color .2s; resize: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--red); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .contact-info { display: flex; flex-direction: column; gap: 1.6rem; justify-content: center; }
+    .contact-info-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .contact-info-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: .1rem; }
+    .contact-info-label { font-size: .8rem; color: var(--muted); margin-bottom: .2rem; }
+    .contact-info-val { font-size: .95rem; font-weight: 600; }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer {
+      background: var(--bg2); padding: 3rem 1.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner { max-width: 720px; margin: 0 auto; }
+    .footer-logo { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
+    .footer-logo svg { width: 28px; height: 23px; }
+    .footer-logo span { font-size: 1.05rem; font-weight: 800; }
+    .footer-logo span em { font-style: normal; color: var(--red); }
+    .footer-tagline { font-size: .85rem; color: var(--muted); line-height: 1.6; margin-bottom: 2rem; }
+    .footer-nav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-bottom: 2rem; }
+    .footer-nav a {
+      font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s;
+    }
+    .footer-nav a:hover { color: var(--white); }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.25); }
   </style>
 </head>
-<body class="text-gray-800 bg-white">
+<body>
 
-  <!-- ═══════════════════════════════ NAVBAR ═══════════════════════════════ -->
-  <header class="glass fixed top-0 left-0 right-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-      <a href="#" class="text-xl font-bold text-blue-600 tracking-tight">
-        M<span class="text-gray-900">Business</span>
-      </a>
+  <!-- ══════════════ NAVBAR ══════════════ -->
+  <nav>
+    <a href="#accueil" class="nav-logo">
+      <!-- Mountain logo SVG -->
+      <svg viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="2,40 16,10 30,40" fill="white"/>
+        <polygon points="18,40 28,18 38,40" fill="white"/>
+        <polygon points="10,40 18,24 22,32 14,40" fill="#0b0e17"/>
+        <polygon points="24,40 30,28 34,36 28,40" fill="#0b0e17"/>
+      </svg>
+      <span><em>M</em>Buisness</span>
+    </a>
+    <button class="burger" id="burger-open" aria-label="Ouvrir le menu">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
 
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="#services" class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">Services</a>
-        <a href="#about"    class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">À propos</a>
-        <a href="#contact"  class="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
-        <a href="#contact"  class="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-          Nous contacter
-        </a>
-      </nav>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="close-btn" id="burger-close" aria-label="Fermer">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+              d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <a href="#accueil"  class="active" onclick="closeMenu()">Accueil</a>
+    <a href="#apropos"  onclick="closeMenu()">À propos</a>
+    <a href="#services" onclick="closeMenu()">Services</a>
+    <a href="#travaux"  onclick="closeMenu()">Travaux</a>
+    <a href="#methode"  onclick="closeMenu()">Méthode</a>
+    <a href="#contact"  onclick="closeMenu()">Contact</a>
+    <a href="#contact"  class="menu-cta" onclick="closeMenu()">Devis gratuit →</a>
+  </div>
 
-      <!-- Burger -->
-      <button id="burger" class="md:hidden p-2 text-gray-600" aria-label="Menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden bg-white border-t px-4 py-4 flex-col gap-4">
-      <a href="#services" class="text-sm font-medium text-gray-700 hover:text-blue-600">Services</a>
-      <a href="#about"    class="text-sm font-medium text-gray-700 hover:text-blue-600">À propos</a>
-      <a href="#contact"  class="text-sm font-medium text-gray-700 hover:text-blue-600">Contact</a>
-      <a href="#contact"  class="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg text-center">
-        Nous contacter
-      </a>
-    </div>
-  </header>
-
-  <main>
-    <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
-    <section class="relative min-h-screen flex items-center"
-             style="background: linear-gradient(135deg, #0f1f35 0%, #1e3a5f 55%, #2563eb 100%)">
-      <div class="orb-1"></div>
-      <div class="orb-2"></div>
-
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-32 text-center text-white w-full">
-        <span class="inline-block px-4 py-1.5 mb-6 text-sm font-medium rounded-full text-blue-200"
-              style="background:rgba(59,130,246,.25); border:1px solid rgba(147,197,253,.35)">
-          Votre partenaire de croissance
-        </span>
-
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-          Propulsez votre<br>
-          <span class="text-blue-300">entreprise</span> vers le succès
-        </h1>
-
-        <p class="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-           style="color:rgba(219,234,254,.9)">
-          MBusiness accompagne les entrepreneurs et les PME dans leur développement
-          avec des solutions sur mesure, concrètes et efficaces.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#services"
-             class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-            Découvrir nos services
-          </a>
-          <a href="#contact"
-             class="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-700 transition-colors">
-            Prendre rendez-vous
-          </a>
-        </div>
+  <!-- ══════════════ HERO ══════════════ -->
+  <section id="accueil">
+    <div class="container">
+      <p class="label hero-tag">MBuisness · Montage vidéo &amp; Création de site</p>
+      <h1 class="hero-h1">
+        Tu tournes.<br>
+        <span class="accent">On gère</span><br>
+        le reste.
+      </h1>
+      <p class="hero-desc">
+        Montage vidéo professionnel + couche opérationnelle complète + site internet.
+        Un système clé en main pour créateurs et établissements francophones.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-red" style="width:fit-content">Devis gratuit →</a>
+        <a href="#travaux" class="btn-ghost">Voir les travaux</a>
       </div>
 
-      <a href="#services"
-         class="bounce absolute bottom-8 left-1/2 -translate-x-1/2"
-         style="color:rgba(255,255,255,.5)" aria-label="Défiler">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </a>
-    </section>
-
-    <!-- ═══════════════════════════════ SERVICES ═══════════════════════════ -->
-    <section id="services" class="py-20 bg-gray-50">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-14">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Nos services</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Des solutions concrètes pour chaque étape de votre développement.
-          </p>
+      <!-- Stats -->
+      <div class="stats-card">
+        <div class="stat-item">
+          <div class="stat-value">48h</div>
+          <div class="stat-label">Délai de livraison garanti</div>
         </div>
+        <div class="stat-item">
+          <div class="stat-value">50+</div>
+          <div class="stat-label">Clients accompagnés</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">×3</div>
+          <div class="stat-label">Audience moyenne en 90j</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Carte 1 -->
-          <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
-            <span class="text-4xl">📊</span>
-            <h3 class="text-lg font-semibold text-gray-900">Stratégie & Conseil</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              Nous analysons votre marché et définissons avec vous une stratégie
-              de croissance adaptée à vos objectifs.
-            </p>
+  <!-- ══════════════ BRAND ══════════════ -->
+  <section id="brand">
+    <div class="container" style="text-align:center">
+      <p class="brand-label">Une seule marque. Trois piliers.</p>
+      <div class="brand-logo-big">
+        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="5,100 40,25 75,100" fill="white"/>
+          <polygon points="45,100 70,45 95,100" fill="white"/>
+          <polygon points="22,100 45,55 55,78 32,100" fill="#0b0e17"/>
+          <polygon points="58,100 72,68 82,88 68,100" fill="#0b0e17"/>
+        </svg>
+        <div class="brand-name-big"><em>M</em>Buisness</div>
+      </div>
+      <p class="brand-quote">
+        "Le sommet, c'est là où tu veux être.<br>Je suis là pour t'y emmener."
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════ À PROPOS ══════════════ -->
+  <section id="apropos" style="background:var(--bg2)">
+    <div class="container">
+      <p class="label">À propos</p>
+      <h2 style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:1.5rem">
+        Un système pensé pour<br>te faire <span style="color:var(--red)">scaler vite.</span>
+      </h2>
+      <p style="color:var(--muted);line-height:1.75;margin-bottom:1rem">
+        MBuisness, c'est une agence digitale franco-africaine qui combine montage vidéo
+        professionnel, stratégie de contenu et création de site web. On s'occupe de tout
+        pendant que tu te concentres sur ton activité.
+      </p>
+      <p style="color:var(--muted);line-height:1.75">
+        Notre mission : transformer chaque créateur et chaque établissement en une marque
+        digitale forte, visible et rentable.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════ SERVICES ══════════════ -->
+  <section id="services">
+    <div class="container-wide">
+      <p class="label">Services</p>
+      <h2 style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:.5rem">
+        Ce qu'on fait pour toi
+      </h2>
+      <p style="color:var(--muted);margin-bottom:2.5rem">
+        Tout ce dont tu as besoin pour exister fort sur internet.
+      </p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🎬</div>
+          <div class="service-title">Montage vidéo</div>
+          <div class="service-desc">
+            Reels, YouTube, TikTok, courts-métrages — montage professionnel livré
+            en 48h avec sous-titres, musique et effets.
           </div>
-          <!-- Carte 2 -->
-          <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
-            <span class="text-4xl">🚀</span>
-            <h3 class="text-lg font-semibold text-gray-900">Développement commercial</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              Acquisition de clients, partenariats stratégiques, structuration
-              de votre force de vente — nous vous accompagnons.
-            </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <div class="service-title">Création de site web</div>
+          <div class="service-desc">
+            Site vitrine, landing page ou portfolio — design moderne, rapide,
+            optimisé mobile et prêt à convertir.
           </div>
-          <!-- Carte 3 -->
-          <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
-            <span class="text-4xl">💼</span>
-            <h3 class="text-lg font-semibold text-gray-900">Gestion de projet</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              Pilotage de vos projets de A à Z avec rigueur et transparence
-              pour livrer dans les délais et le budget.
-            </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <div class="service-title">Stratégie de contenu</div>
+          <div class="service-desc">
+            Plan de publication, scripts, formats — on optimise chaque contenu
+            pour maximiser ta portée organique.
           </div>
-          <!-- Carte 4 -->
-          <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-4">
-            <span class="text-4xl">📱</span>
-            <h3 class="text-lg font-semibold text-gray-900">Présence digitale</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              Site web, réseaux sociaux, SEO — nous renforçons votre visibilité
-              en ligne pour attirer plus de clients.
-            </p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📈</div>
+          <div class="service-title">Couche opérationnelle</div>
+          <div class="service-desc">
+            Automatisation, outils de gestion, newsletter — on met en place
+            le système complet derrière ta marque.
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ═══════════════════════════════ ABOUT ══════════════════════════════ -->
-    <section id="about" class="py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+  <!-- ══════════════ TRAVAUX ══════════════ -->
+  <section id="travaux" style="background:var(--bg2)">
+    <div class="container-wide">
+      <p class="label">Travaux</p>
+      <h2 style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:2.5rem">
+        Quelques réalisations
+      </h2>
+      <div class="travaux-grid">
+        <div class="travaux-card">
+          <div class="travaux-tag">Montage vidéo</div>
+          <div class="travaux-title">Reels Instagram — Creator FR</div>
+        </div>
+        <div class="travaux-card">
+          <div class="travaux-tag">Site web</div>
+          <div class="travaux-title">Landing page — Restaurant Dakar</div>
+        </div>
+        <div class="travaux-card">
+          <div class="travaux-tag">Stratégie contenu</div>
+          <div class="travaux-title">×3 audience en 90 jours</div>
+        </div>
+        <div class="travaux-card">
+          <div class="travaux-tag">Branding</div>
+          <div class="travaux-title">Identité visuelle complète</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ MÉTHODE ══════════════ -->
+  <section id="methode">
+    <div class="container">
+      <p class="label">Méthode</p>
+      <h2 style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:.5rem">
+        Comment ça marche ?
+      </h2>
+      <p style="color:var(--muted);margin-bottom:1rem">Simple, rapide, efficace.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Qui sommes-nous ?</h2>
-            <p class="text-gray-600 leading-relaxed mb-6">
-              Fondée avec une vision claire — rendre accessible l'expertise business
-              aux entrepreneurs ambitieux — MBusiness est bien plus qu'un cabinet
-              de conseil. Nous sommes votre partenaire de terrain, engagé dans vos succès.
-            </p>
-            <p class="text-gray-600 leading-relaxed mb-8">
-              Notre équipe pluridisciplinaire combine expertise stratégique, sens
-              commercial et maîtrise des outils digitaux pour vous offrir un
-              accompagnement à 360°, adapté à la réalité de votre marché.
-            </p>
-            <a href="#contact"
-               class="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-              En savoir plus
-            </a>
+            <div class="step-title">Brief &amp; devis en 24h</div>
+            <div class="step-desc">Tu remplis le formulaire, on analyse ta demande et on t'envoie une offre claire sous 24h.</div>
           </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">Production &amp; livraison 48h</div>
+            <div class="step-desc">On passe en production immédiatement. Montage, développement ou stratégie — livré en 48h garantis.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Révisions &amp; validation</div>
+            <div class="step-desc">Tu valides ou demandes des ajustements. On itère jusqu'à ce que ce soit parfait pour toi.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Mise en ligne &amp; suivi</div>
+            <div class="step-desc">On publie, on mesure les résultats et on reste dispo pour optimiser en continu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="grid grid-cols-2 gap-6">
-            <div class="rounded-2xl p-6 text-white text-center"
-                 style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">
-              <div class="text-3xl font-extrabold mb-1">150+</div>
-              <div class="text-sm" style="color:rgba(191,219,254,.85)">Clients accompagnés</div>
+  <!-- ══════════════ CTA BANNER ══════════════ -->
+  <section id="cta">
+    <div class="container" style="position:relative;z-index:1">
+      <p class="cta-label">Prêt à scaler ?</p>
+      <h2 class="cta-title">Obtiens ton devis<br>en moins de 24h</h2>
+      <a href="#contact" class="btn-red-lg">Je veux un devis gratuit</a>
+    </div>
+  </section>
+
+  <!-- ══════════════ CONTACT ══════════════ -->
+  <section id="contact">
+    <div class="container-wide">
+      <p class="label">Contact</p>
+      <h2 style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;line-height:1.15;margin-bottom:2.5rem">
+        Parle-nous de ton projet
+      </h2>
+      <div class="contact-grid">
+        <form onsubmit="return false">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom</label>
+              <input type="text" placeholder="Jean"/>
             </div>
-            <div class="rounded-2xl p-6 text-white text-center"
-                 style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">
-              <div class="text-3xl font-extrabold mb-1">8 ans</div>
-              <div class="text-sm" style="color:rgba(191,219,254,.85)">D'expérience</div>
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" placeholder="Dupont"/>
             </div>
-            <div class="rounded-2xl p-6 text-white text-center"
-                 style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">
-              <div class="text-3xl font-extrabold mb-1">98%</div>
-              <div class="text-sm" style="color:rgba(191,219,254,.85)">Satisfaction client</div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="jean@email.com"/>
+          </div>
+          <div class="form-group">
+            <label>Ton projet</label>
+            <textarea rows="5" placeholder="Montage vidéo, site web, stratégie..."></textarea>
+          </div>
+          <a href="mailto:contact@mbusiness.fr" class="btn-red" style="width:100%;justify-content:center">
+            Envoyer →
+          </a>
+        </form>
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-val">contact@mbusiness.fr</div>
             </div>
-            <div class="rounded-2xl p-6 text-white text-center"
-                 style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">
-              <div class="text-3xl font-extrabold mb-1">40+</div>
-              <div class="text-sm" style="color:rgba(191,219,254,.85)">Secteurs couverts</div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📱</div>
+            <div>
+              <div class="contact-info-label">WhatsApp / Téléphone</div>
+              <div class="contact-info-val">+33 1 00 00 00 00</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">🌍</div>
+            <div>
+              <div class="contact-info-label">Zone</div>
+              <div class="contact-info-val">France &amp; Francophonie</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ═══════════════════════════════ CONTACT ════════════════════════════ -->
-    <section id="contact" class="py-20 bg-gray-50">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-14">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contactez-nous</h2>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            Un projet ? Une question ? Nous sommes disponibles pour vous répondre.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <!-- Formulaire -->
-          <div class="bg-white rounded-2xl shadow-sm p-8">
-            <h3 class="text-xl font-semibold mb-6 text-gray-900">Envoyez-nous un message</h3>
-            <form class="flex flex-col gap-4" onsubmit="return false">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-                  <input type="text" placeholder="Jean"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm
-                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-                  <input type="text" placeholder="Dupont"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm
-                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-                </div>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input type="email" placeholder="jean.dupont@email.com"
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea rows="5" placeholder="Décrivez votre projet ou votre question..."
-                  class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm resize-none
-                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
-              </div>
-              <button type="submit"
-                class="w-full py-3 bg-blue-600 text-white text-sm font-semibold rounded-lg
-                       hover:bg-blue-700 transition-colors">
-                Envoyer le message
-              </button>
-            </form>
-          </div>
-
-          <!-- Infos de contact -->
-          <div class="flex flex-col justify-center gap-6">
-            <div class="flex items-start gap-4">
-              <span class="text-2xl">📧</span>
-              <div>
-                <div class="text-sm font-semibold text-gray-900">Email</div>
-                <div class="text-gray-600">contact@mbusiness.fr</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <span class="text-2xl">📞</span>
-              <div>
-                <div class="text-sm font-semibold text-gray-900">Téléphone</div>
-                <div class="text-gray-600">+33 1 00 00 00 00</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <span class="text-2xl">📍</span>
-              <div>
-                <div class="text-sm font-semibold text-gray-900">Adresse</div>
-                <div class="text-gray-600">Paris, France</div>
-              </div>
-            </div>
-
-            <div class="mt-2 p-4 rounded-xl text-sm text-blue-700 bg-blue-50">
-              <strong>Note :</strong> Pour activer l'envoi du formulaire, connectez-le à
-              <a href="https://formspree.io" target="_blank" rel="noopener" class="underline">Formspree</a>
-              ou configurez une API route Next.js.
-            </div>
-          </div>
-        </div>
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg viewBox="0 0 48 40" fill="none">
+          <polygon points="2,40 16,10 30,40" fill="white"/>
+          <polygon points="18,40 28,18 38,40" fill="white"/>
+          <polygon points="10,40 18,24 22,32 14,40" fill="#111520"/>
+          <polygon points="24,40 30,28 34,36 28,40" fill="#111520"/>
+        </svg>
+        <span><em>M</em>Buisness</span>
       </div>
-    </section>
-  </main>
-
-  <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
-  <footer style="background:#0f1f35" class="text-white py-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <span class="text-xl font-bold text-blue-300">
-        M<span class="text-white">Business</span>
-      </span>
-      <p class="text-sm text-gray-400">© 2026 MBusiness. Tous droits réservés.</p>
-      <nav class="flex gap-6 text-sm text-gray-400">
-        <a href="#services" class="hover:text-white transition-colors">Services</a>
-        <a href="#about"    class="hover:text-white transition-colors">À propos</a>
-        <a href="#contact"  class="hover:text-white transition-colors">Contact</a>
+      <p class="footer-tagline">
+        Système de croissance digitale clé en main.<br>
+        Tu crées. On publie. On scale.
+      </p>
+      <nav class="footer-nav">
+        <a href="#accueil">Accueil</a>
+        <a href="#apropos">À propos</a>
+        <a href="#services">Services</a>
+        <a href="#travaux">Travaux</a>
+        <a href="#methode">Méthode</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <p class="footer-copy">© 2026 MBuisness. Tous droits réservés.</p>
     </div>
   </footer>
 
   <script>
-    // Burger menu
-    const burger = document.getElementById('burger')
-    const menu   = document.getElementById('mobile-menu')
-    burger.addEventListener('click', () => menu.classList.toggle('open'))
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')))
+    const menu = document.getElementById('mobile-menu')
+    document.getElementById('burger-open').addEventListener('click', () => menu.classList.add('open'))
+    document.getElementById('burger-close').addEventListener('click', () => menu.classList.remove('open'))
+    function closeMenu() { menu.classList.remove('open') }
   </script>
 </body>
 </html>
