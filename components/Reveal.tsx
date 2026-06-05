@@ -17,6 +17,13 @@ export default function Reveal({
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    // Element is already above the fold (e.g. page reloaded while scrolled)
+    if (el.getBoundingClientRect().bottom < 0) {
+      el.classList.add('visible')
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -24,7 +31,12 @@ export default function Reveal({
           observer.unobserve(el)
         }
       },
-      { threshold: 0.12 }
+      {
+        threshold: 0,
+        // Pre-trigger 150px before element reaches the viewport so fast
+        // scrolling never causes the observer to miss the entry event
+        rootMargin: '0px 0px 150px 0px',
+      }
     )
     observer.observe(el)
     return () => observer.disconnect()
