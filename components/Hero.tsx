@@ -7,52 +7,10 @@ export default function Hero() {
       className="relative flex flex-col items-center justify-center min-h-screen px-6 pt-24 pb-20 text-center overflow-hidden dot-grid"
       style={{ background: 'var(--bg)' }}
     >
-      {/* ── Cinematic aurora background (video-like) ── */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Large orb — red/warm, top-left */}
-        <div className="aurora-1 absolute rounded-full" style={{
-          top: '-15%', left: '-10%', width: 800, height: 800,
-          background: 'radial-gradient(circle, rgba(232,57,28,0.13) 0%, rgba(180,30,10,0.06) 40%, transparent 70%)',
-          filter: 'blur(80px)',
-        }} />
-        {/* Large orb — indigo, bottom-right */}
-        <div className="aurora-2 absolute rounded-full" style={{
-          bottom: '-20%', right: '-15%', width: 900, height: 900,
-          background: 'radial-gradient(circle, rgba(80,100,240,0.09) 0%, rgba(60,80,200,0.04) 40%, transparent 70%)',
-          filter: 'blur(100px)',
-        }} />
-        {/* Mid orb — deep red, center-bottom */}
-        <div className="aurora-3 absolute rounded-full" style={{
-          bottom: '5%', left: '30%', width: 600, height: 600,
-          background: 'radial-gradient(circle, rgba(232,57,28,0.07) 0%, transparent 65%)',
-          filter: 'blur(70px)',
-        }} />
-        {/* Violet orb, top-right */}
-        <div className="aurora-2 absolute rounded-full" style={{
-          top: '10%', right: '5%', width: 400, height: 400,
-          background: 'radial-gradient(circle, rgba(130,60,220,0.07) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          animationDelay: '-10s',
-        }} />
-
-        {/* Spinning rings */}
-        <div className="spin-slow absolute" style={{
-          top: '50%', left: '50%',
-          marginTop: -320, marginLeft: -320,
-          width: 640, height: 640,
-          borderRadius: '50%',
-          border: '1px solid rgba(255,255,255,0.025)',
-        }} />
-        <div className="spin-slow absolute" style={{
-          top: '50%', left: '50%',
-          marginTop: -210, marginLeft: -210,
-          width: 420, height: 420,
-          borderRadius: '50%',
-          border: '1px solid rgba(232,57,28,0.055)',
-          animationDirection: 'reverse',
-          animationDuration: '32s',
-        }} />
-      </div>
+      {/* ── Static ambient glow (no GPU animation) ── */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse 70% 60% at 15% 20%, rgba(232,57,28,0.10) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 85% 80%, rgba(80,100,240,0.07) 0%, transparent 70%)',
+      }} />
 
       {/* ── Content ── */}
       <div className="relative z-10 max-w-2xl">
