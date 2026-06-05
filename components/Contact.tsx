@@ -31,7 +31,7 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder={label}
-                    className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none transition-all"
+                    className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none transition-all placeholder:text-white/30"
                     style={{
                       background: 'var(--bg3)',
                       border: '1px solid var(--border)',
@@ -46,7 +46,7 @@ export default function Contact() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none transition-all"
+              className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none transition-all placeholder:text-white/30"
               style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
               onFocus={e => (e.target.style.borderColor = 'var(--border-2)')}
               onBlur={e => (e.target.style.borderColor = 'var(--border)')}
@@ -55,7 +55,7 @@ export default function Contact() {
             <textarea
               rows={4}
               placeholder="Décris ton projet — montage vidéo, site web, stratégie..."
-              className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none resize-none transition-all"
+              className="w-full px-4 py-3.5 rounded-xl text-sm text-white outline-none resize-none transition-all placeholder:text-white/30"
               style={{ background: 'var(--bg3)', border: '1px solid var(--border)' }}
               onFocus={e => (e.target.style.borderColor = 'var(--border-2)')}
               onBlur={e => (e.target.style.borderColor = 'var(--border)')}

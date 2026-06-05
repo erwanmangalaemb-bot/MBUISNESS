@@ -88,13 +88,12 @@ export default function Travaux() {
 
         <div className="grid grid-cols-2 gap-3">
           {items.map((item, i) => (
-            <Reveal key={item.title} delay={i * 70}>
+            <Reveal key={item.title} delay={i * 70} className={item.wide ? 'col-span-2' : ''}>
               <div
                 className="card-hover relative rounded-2xl overflow-hidden cursor-pointer"
                 style={{
                   background: item.gradient,
                   border: '1px solid var(--border)',
-                  gridColumn: item.wide ? 'span 2' : 'span 1',
                   aspectRatio: item.wide ? '16/6' : '1',
                 }}
               >
