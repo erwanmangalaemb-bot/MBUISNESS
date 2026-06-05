@@ -49,24 +49,6 @@
   100% { background-position: 0% center; }
 }
 
-/* ── Scroll reveal ───────────────────────── */
-/*
-  Elements are VISIBLE by default (SSR/no-JS safe).
-  JS marks below-fold elements with [data-below], hiding them.
-  Adding .visible triggers the animated reveal.
-  This prevents blank pages when JS is slow or skips an observer event.
-*/
-.reveal[data-below] {
-  opacity: 0;
-  transform: translateY(18px);
-}
-.reveal.visible {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
-              transform 0.65s cubic-bezier(0.16,1,0.3,1);
-}
-
 /* ── Marquee ─────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }

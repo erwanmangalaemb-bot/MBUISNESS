@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
   to: number
@@ -8,24 +8,10 @@ interface Props {
   duration?: number
 }
 
-export default function Counter({ to, suffix = '', prefix = '', duration = 1800 }: Props) {
-  const [count, setCount]   = useState(0)
-  const [started, setStarted] = useState(false)
-  const ref                 = useRef<HTMLSpanElement>(null)
+export default function Counter({ to, suffix = '', prefix = '', duration = 1400 }: Props) {
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.unobserve(el) } },
-      { threshold: 0.5 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!started) return
     let start: number | null = null
     const step = (ts: number) => {
       if (!start) start = ts
@@ -35,7 +21,7 @@ export default function Counter({ to, suffix = '', prefix = '', duration = 1800 
       if (progress < 1) requestAnimationFrame(step)
     }
     requestAnimationFrame(step)
-  }, [started, to, duration])
+  }, [to, duration])
 
-  return <span ref={ref}>{prefix}{count}{suffix}</span>
+  return <span>{prefix}{count}{suffix}</span>
 }
