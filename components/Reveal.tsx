@@ -18,11 +18,17 @@ export default function Reveal({
     const el = ref.current
     if (!el) return
 
-    // Element is already above the fold (e.g. page reloaded while scrolled)
-    if (el.getBoundingClientRect().bottom < 0) {
+    const rect = el.getBoundingClientRect()
+
+    // Already in or near the viewport → reveal immediately, no animation needed
+    if (rect.top < window.innerHeight + 100) {
       el.classList.add('visible')
       return
     }
+
+    // Below the fold: mark it so CSS hides it, then observe with a generous
+    // pre-trigger zone so even very fast iOS momentum scrolling can't miss it
+    el.setAttribute('data-below', '')
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,9 +39,7 @@ export default function Reveal({
       },
       {
         threshold: 0,
-        // Pre-trigger 150px before element reaches the viewport so fast
-        // scrolling never causes the observer to miss the entry event
-        rootMargin: '0px 0px 150px 0px',
+        rootMargin: '0px 0px 500px 0px',
       }
     )
     observer.observe(el)
