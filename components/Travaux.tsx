@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import CircularReveal from './CircularReveal'
 
 const items = [
   {
@@ -73,7 +74,7 @@ export default function Travaux() {
             <div>
               <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: 'var(--red)' }}>Travaux</p>
               <h2 className="font-black tracking-tight" style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}>
-                Réalisations
+                <CircularReveal>Réalisations</CircularReveal>
               </h2>
             </div>
             <a

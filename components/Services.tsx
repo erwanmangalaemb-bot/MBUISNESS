@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import CircularReveal from './CircularReveal'
 
 const services = [
   {
@@ -44,7 +45,7 @@ export default function Services() {
               className="font-black tracking-tight"
               style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}
             >
-              Ce qu&apos;on fait pour toi
+              <CircularReveal>Ce qu&apos;on fait pour toi</CircularReveal>
             </h2>
           </div>
         </Reveal>

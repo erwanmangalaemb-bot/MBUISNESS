@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import CircularReveal from './CircularReveal'
 
 const reviews = [
   {
@@ -41,7 +42,7 @@ export default function Testimonials() {
               Avis clients
             </p>
             <h2 className="font-black tracking-tight" style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}>
-              Ils nous font confiance
+              <CircularReveal>Ils nous font confiance</CircularReveal>
             </h2>
           </div>
         </Reveal>

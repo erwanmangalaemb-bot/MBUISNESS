@@ -152,3 +152,60 @@
   margin-left: 2px;
 }
 
+/* ── Circular reveal heading ─────────────── */
+@keyframes circularReveal {
+  from {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0.4;
+  }
+  to {
+    clip-path: circle(75% at 50% 50%);
+    opacity: 1;
+  }
+}
+.circular-reveal {
+  animation: circularReveal 1s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* ── Cinematic staggered entrance ────────── */
+@keyframes cinematicIn {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cinematic-in > * {
+  animation: cinematicIn 0.9s cubic-bezier(0.16,1,0.3,1) both;
+}
+.cinematic-in > *:nth-child(1) { animation-delay: 0.05s; }
+.cinematic-in > *:nth-child(2) { animation-delay: 0.16s; }
+.cinematic-in > *:nth-child(3) { animation-delay: 0.27s; }
+.cinematic-in > *:nth-child(4) { animation-delay: 0.38s; }
+.cinematic-in > *:nth-child(5) { animation-delay: 0.49s; }
+
+/* ── Modem footer — blink + scanline ─────── */
+@keyframes modemBlink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px 1px currentColor; }
+  50%      { opacity: 0.3; box-shadow: 0 0 2px 0px currentColor; }
+}
+.modem-dot { animation: modemBlink 1.6s ease-in-out infinite; }
+.modem-dot:nth-of-type(2) { animation-delay: 0.25s; }
+.modem-dot:nth-of-type(3) { animation-delay: 0.5s; }
+
+@keyframes modemScan {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.modem-scanline {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.modem-scanline::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(232,57,28,0.06), transparent);
+  animation: modemScan 5s linear infinite;
+}
+

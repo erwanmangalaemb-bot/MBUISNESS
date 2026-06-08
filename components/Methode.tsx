@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import CircularReveal from './CircularReveal'
 
 const steps = [
   { n: '01', title: 'Brief & devis',       desc: 'Tu décris ton projet. On répond avec une offre claire sous 24h.' },
@@ -21,7 +22,7 @@ export default function Methode() {
               className="font-black tracking-tight"
               style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}
             >
-              Simple. Rapide. Efficace.
+              <CircularReveal>Simple. Rapide. Efficace.</CircularReveal>
             </h2>
           </div>
         </Reveal>
