@@ -1,5 +1,6 @@
 'use client'
 import Reveal from './Reveal'
+import CircularReveal from './CircularReveal'
 
 export default function Contact() {
   return (
@@ -15,7 +16,7 @@ export default function Contact() {
               className="font-black tracking-tight mb-3"
               style={{ fontSize: 'clamp(2rem,6vw,3.2rem)', letterSpacing: '-0.03em' }}
             >
-              Parlons de ton projet
+              <CircularReveal>Parlons de ton projet</CircularReveal>
             </h2>
             <p className="text-sm" style={{ color: 'var(--muted)' }}>
               Répond sous 24h · Sans engagement

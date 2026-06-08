@@ -9,7 +9,8 @@ const nav = [
 
 export default function Footer() {
   return (
-    <footer className="px-6 py-12" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg)' }}>
+    <footer className="relative px-6 py-12 overflow-hidden" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg)' }}>
+      <div className="modem-scanline" />
       <div
         className="mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8"
         style={{ maxWidth: 680 }}
@@ -46,8 +47,16 @@ export default function Footer() {
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
             © {new Date().getFullYear()} MBuisness
           </p>
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--muted)' }}>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#22c55e' }} />
+          <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--muted)' }}>
+            <span className="flex items-end gap-0.5" aria-hidden="true">
+              {[3, 5, 7].map(h => (
+                <span
+                  key={h}
+                  className="modem-dot rounded-sm"
+                  style={{ width: 2.5, height: h, background: '#22c55e', color: '#22c55e' }}
+                />
+              ))}
+            </span>
             Opérationnel
           </div>
         </div>
